@@ -137,7 +137,7 @@ const levelChars = {
       return dom
   }
 
-  class DOMDIsplay {
+  class DOMDisplay {
       constructor(parent, level) {
           this.dom = elt("div", {class: "game"}, drawGrid(level))
           this.actorLayer = null
@@ -171,7 +171,7 @@ function drawActors(actors) {
     }))
 }
 
-DOMDIsplay.prototype.syncState = function(state) {
+DOMDisplay.prototype.syncState = function(state) {
     if (this.actorLayer) this.sctorLayer.revome()
     this.actorLayer = drawActors(state.actors)
     this.dom.appendChild(this.actorLayer)
@@ -179,7 +179,7 @@ DOMDIsplay.prototype.syncState = function(state) {
     this.scrollPlayerIntoView(state)
 }
 
-OMDisplay.prototype.scrollPlayerIntoView = function(state) {
+DOMDisplay.prototype.scrollPlayerIntoView = function(state) {
     let width = this.dom.clientWidth
     let height = this.dom.clientHeight
     let margin = width / 3
@@ -325,6 +325,7 @@ function trackKeys(keys) {
 const arrowKeys = trackKeys(["ArrowLeft", "ArrowRight", "ArrowUp"])
 
 
+
 function runAnimation(frameFunc) {
     let lastTime = null
     function frame(time) {
@@ -360,7 +361,7 @@ function runLevel (level, Display) {
     })
 }
 
- export async function runGame(plans, Display) {
+  async function runGame(plans, Display) {
     for (let level = 0; level < plans.length;) {
         let status = await runLevel(new Level(plans[level]),
         Display)
@@ -548,10 +549,6 @@ if (typeof module != "undefined" && module.exports && (typeof window == "undefin
   module.exports = GAME_LEVELS;
 if (typeof global != "undefined" && !global.GAME_LEVELS)
   global.GAME_LEVELS = GAME_LEVELS;
-
-
-
-
 
 
 
